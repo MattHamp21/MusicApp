@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Button } from "semantic-ui-react";
+import React from "react";
+import MusicForm from "./MusicForm";
+import Songs from "./Songs";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    show: false,
+    songs: [
+      { id: 1, name: "song1", artist: "billy" },
+      { id: 2, name: "song2", artist: "bob" },
+      { id: 3, name: "song3", artist: "joe" },
+    ],
+  };
+
+  addSong = (songInfo) => {
+    let newSong = { ...songInfo, id: Math.random() };
+    let newSongs = [newSong, ...this.state.songs];
+    console.log(this.state.songs);
+    this.setState({
+      songs: newSongs,
+    });
+  };
+
+  deleteSong = (id) => {
+    let newSongs = this.state.songs.filter((c) => c.id !== id);
+    console.log(id);
+    this.setState({
+      songs: newSongs,
+    });
+  };
+  render() {
+    const { show } = this.state;
+    return (
+      <div>
+        <h1>Songs</h1>;
+        <MusicForm addSong={this.addSong} />;
+        <Songs songs={this.state.songs} deleteSong={this.deleteSong} />;
+      </div>
+    );
+  }
 }
 
 export default App;
