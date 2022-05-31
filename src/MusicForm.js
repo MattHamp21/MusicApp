@@ -38,7 +38,12 @@ class MusicForm extends React.Component {
             value={this.state.artist}
             onChange={this.handleChange}
           />
-          <Form.Button>Add</Form.Button>
+          <Form.Button
+            color="green
+          "
+          >
+            Add New Song
+          </Form.Button>
         </Form.Group>
       </Form>
     );
